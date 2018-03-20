@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Opioid Conversion Calculator</title>
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        h1 {
+            font-family: helvetica, arial;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        h2 {
+            font-family: helvetica, arial;
+            font-size: 20px;
+        }
+
+        input[type=number] {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333333;
+            border: none;
+            color: white;
+            font-family: helvetica, arial;
+            font-size: 20px;
+            padding: 10px;
+            text-decoration: none;
+            margin: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+            font-family: helvetica, arial;
+            font-size: 16px;
+        }
+
+        p {
+            font-family: arial;
+            font-size: 16px;
+        }
+
+        .optable {
+            background: grey;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .box {
+            background: silver;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        a:link,
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:active {
+            color: white;
+        }
+
+        .resources {
+            background: #DDDDDD;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        function convertThis() {
+            var ratios = {
+                bupatch: [2, "(mcg/hr) Buprenorphine Patch"],
+                buslin: [40, "(mcg/hr) Buprenorphine Sublingual"],
+                codo: [0.13, "(mg) Codeine Oral"],
+                codiv: [0.25, "(mg) Codeine IV"],
+                dextroo: [0.1, "(mg) Dextropropoxyphene Oral"],
+                fentiv: [0.2, "(mcg) Fentanyl IV"],
+                fentpatch: [3, "(mcg/hr) Fentanyl Patch"],
+                fentscut: [0.25, "(mcg) Fentanyl Subcutaneous"],
+                hmorpho: [5, "(mg) Hydromorphone Oral"],
+                hmorphscut: [6.25, "(mg) Hydromorphone Subcutaneous"],
+                morpho: [1, "(mg) Morphine Oral"],
+                morphinesc: [2.5, "(mg) Morphine Subcutaneous"],
+                morphiv: [3, "(mg) Morphine IV"],
+                oxycodoneo: [1.5, "(mg) Oxycodone Oral"],
+                oxycodoneiv: [3, "(mg) Oxycodone IV"],
+                oxycodonerect: [1.5, "(mg) Oxycodone Rectal"],
+                oxycodonescut: [2.5, "(mg) Oxycodone Subcutaneous"],
+                pethiv: [0.4, "(mg) Pethidine IV"],
+                sufiv: [2, "(mg) Sufentanil IV"],
+                tapentadolo: [0.4, "(mg) Tapentadol Oral"],
+                tramadolo: [0.2, "(mg) Tramadol Oral"]
+            };
+            var dose = document.getElementById("dose").value;
+            var drug1 = document.getElementById("drug1").value;
+            var drug2 = document.getElementById("drug2").value;
+            var dosecalc = dose * ratios[drug1][0] / ratios[drug2][0];
+            var dose2 = Math.floor(dosecalc);
+            text = `${dose} ${ratios[drug1][1]} converts to ${dose2} ${ratios[drug2][1]}`;
+            document.getElementById("converthere").innerHTML = text;
+        }
+    </script>
+</head>
+
+<body>
+    <h1> Opioid Conversion Calculator </h1>
+
+    <div class="optable" id="optable">
+
+        <div class="box">
+            <h2>Convert from:</h2>
+            <form action="/action_page.php">
+                <p>Dose:</p>
+                <input type="number" name="dose" id="dose">
+                <p>Drug:</p>
+                <select name="drug1" id="drug1">
+                    <option value="bupatch">Buprenorphine (mcg/hr) Patch</option>
+                    <option value="buslin">Buprenorphine (mcg/hr) Sublingual</option>
+                    <option value="codo">Codeine (mg) Oral</option>
+                    <option value="codiv">Codeine (mg) IV</option>
+                    <option value="dextroo">Dextropropoxyphene (mg) Oral</option>
+                    <option value="fentiv">Fentanyl (mcg) IV</option>
+                    <option value="fentpatch">Fentanyl (mcg/hr) Patch</option>
+                    <option value="fentscut">Fentanyl (mcg) Subcutaneous</option>
+                    <option value="hmorpho">Hydromorphone (mg) Oral </option>
+                    <option value="hmorphscut">Hydromorphone (mg) Subcutaneous </option>
+                    <option value="morpho">Morphine (mg) Oral</option>
+                    <option value="morphinesc">Morphine (mg) Subcutaneous </option>
+                    <option value="morphiv"> Morphine (mg) IV </option>
+                    <option value="oxycodoneo">Oxycodone (mg) Oral</option>
+                    <option value="oxycodoneiv">Oxycodone (mg) IV</option>
+                    <option value="oxycodonerect">Oxycodone (mg) Rectal </option>
+                    <option value="oxycodonescut">Oxycodone (mg) Subcutaneous </option>
+                    <option value="pethiv"> Pethidine (mg) IV </option>
+                    <option value="sufiv"> Sufentanil (mg) IV </option>
+                    <option value="tapentadolo">Tapentadol (mg) Oral</option>
+                    <option value="tramadolo">Tramadol (mg) Oral</option>
+                </select>
+        </div>
+
+        <div class="box">
+            <h2>Covert to :</h2>
+            <p>Drug:</p>
+            <select name="drug2" id="drug2">
+                <option value="bupatch">Buprenorphine (mcg/hr) Patch</option>
+                <option value="buslin">Buprenorphine (mcg/hr) Sublingual</option>
+                <option value="codo">Codeine (mg) Oral</option>
+                <option value="codiv">Codeine (mg) IV</option>
+                <option value="dextroo">Dextropropoxyphene (mg) Oral</option>
+                <option value="fentiv">Fentanyl (mcg) IV</option>
+                <option value="fentpatch">Fentanyl (mcg/hr) Patch</option>
+                <option value="fentscut">Fentanyl (mcg) Subcutaneous</option>
+                <option value="hmorpho">Hydromorphone (mg) Oral </option>
+                <option value="hmorphscut">Hydromorphone (mg) Subcutaneous </option>
+                <option value="morpho">Morphine (mg) Oral</option>
+                <option value="morphinesc">Morphine (mg) Subcutaneous </option>
+                <option value="morphiv"> Morphine (mg) IV </option>
+                <option value="oxycodoneo">Oxycodone (mg) Oral</option>
+                <option value="oxycodoneiv">Oxycodone (mg) IV</option>
+                <option value="oxycodonerect">Oxycodone (mg) Rectal </option>
+                <option value="oxycodonescut">Oxycodone (mg) Subcutaneous </option>
+                <option value="pethiv"> Pethidine (mg) IV </option>
+                <option value="sufiv"> Sufentanil (mg) IV </option>
+                <option value="tapentadolo">Tapentadol (mg) Oral</option>
+                <option value="tramadolo">Tramadol (mg) Oral</option>
+            </select>
+        </div>
+
+        <div class="box">
+            <button type="button" onclick="convertThis()">Convert!</button>
+        </div>
+
+        </form>
+
+        <div class="box">
+            <h2>Result:</h2>
+            <p id="converthere"></p>
+        </div>
+
+    </div>
+
+    <div class="resources">
+        <h2>Resources:</h2>
+        <p>
+            <a href="http://fpm.anzca.edu.au/documents/opioid-dose-equivalence.pdf" target="_blank">ANZCA Faculty of Pain Medicine Opioid Dose Equivalence</a>
+        </p>
+        <p>
+            <a href="http://www.emrpcc.org.au/wp-content/uploads/2016/05/Opioid-Conversions-May-3-2016-final.pdf" target="_blank">Eastern Metropolitan Region Palliative Care Consortium Opioid Conversion Ratios</a>
+        </p>
+    </div>
+
+
+</body>
+
+</html>
